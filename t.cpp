@@ -1,7 +1,7 @@
 
 #define BOOST_MATH_INSTRUMENT
 
-#include <boost/math/special_functions/bessel.hpp>
+#include <boost/math/special_functions.hpp>
 
 
 int main()
