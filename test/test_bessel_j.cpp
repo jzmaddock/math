@@ -232,8 +232,38 @@ void expected_results()
          ".*",                          // platform
          largest_type,                  // test type(s)
          ".*(JN|j).*|.*Tricky.*",       // test data group
-         ".*", 33000, 20000);               // test function
+         ".*", 33000, 20000);           // test function
    }
+   else if ((std::numeric_limits<double>::digits != std::numeric_limits<long double>::digits))
+   {
+      // when we call Jn(double) we call the 80-bit rational approximations on the assumption
+      // that these will provide full double precision.  However, we still see some spillover
+      // of errors near the root.  This could be solved by calling a full 128-bit approximation
+      // but at the cost of a *much* slower runtime.  In other words a compromise.
+      //
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                          // platform
+         "double",                      // test type(s)
+         ".*J0.*Tricky.*",              // test data group
+         ".*", 80000, 60000);           // test function
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                          // platform
+         "double",                      // test type(s)
+         ".*J1.*Tricky.*",              // test data group
+         ".*", 100, 100);               // test function
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                          // platform
+         "double",                      // test type(s)
+         "Mathworld.*",                 // test data group
+         ".*", 30, 30);                 // test function
+   }
+
 #endif
    add_expected_result(
       ".*",                          // compiler
