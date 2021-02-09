@@ -6,12 +6,13 @@
 
 int main()
 {
-   long double a = -1000;
-   long double b = 700;
-   long double expect = 6.51561979144735818903553852606382e-31L;
-   long double result = boost::math::cyl_bessel_k(a, b);
-   std::cout << std::setprecision(std::numeric_limits<long double>::max_digits10) << result << std::endl;
-   long double err = fabs((expect - result) / expect);
-   std::cout << err << std::endl;
-   std::cout << err / std::numeric_limits<long double>::epsilon() << std::endl;
+   double x = 11.791534423828125;
+   long double r = -3.53017140778223781420794006033810387155048392363051866610931e-9L;
+
+   double r1 = boost::math::cyl_bessel_j(0, x);
+   long double r2 = boost::math::cyl_bessel_j(0, (long double)x);
+
+   std::cout << boost::math::relative_difference(r1, (double)r) << std::endl;
+   std::cout << boost::math::relative_difference(r2, r) << std::endl;
+
 }

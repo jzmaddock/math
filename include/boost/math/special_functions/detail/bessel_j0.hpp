@@ -175,11 +175,16 @@ T bessel_j0(T x)
     {
         T y = 8 / x;
         T y2 = y * y;
+        BOOST_MATH_INSTRUMENT_VARIABLE(y);
+        BOOST_MATH_INSTRUMENT_VARIABLE(y2);
         BOOST_ASSERT(sizeof(PC) == sizeof(QC));
         BOOST_ASSERT(sizeof(PS) == sizeof(QS));
         rc = evaluate_rational(PC, QC, y2);
         rs = evaluate_rational(PS, QS, y2);
         factor = constants::one_div_root_pi<T>() / sqrt(x);
+        BOOST_MATH_INSTRUMENT_VARIABLE(rc);
+        BOOST_MATH_INSTRUMENT_VARIABLE(rs);
+        BOOST_MATH_INSTRUMENT_VARIABLE(factor);
         //
         // What follows is really just:
         //
@@ -191,7 +196,10 @@ T bessel_j0(T x)
         //
         T sx = sin(x);
         T cx = cos(x);
+        BOOST_MATH_INSTRUMENT_VARIABLE(sx);
+        BOOST_MATH_INSTRUMENT_VARIABLE(cx);
         value = factor * (rc * (cx + sx) - y * rs * (sx - cx));
+        BOOST_MATH_INSTRUMENT_VARIABLE(value);
     }
 
     return value;
