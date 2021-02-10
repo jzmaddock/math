@@ -260,7 +260,7 @@ void expected_results()
          ".*",                          // stdlib
          ".*",                          // platform
          "double",                      // test type(s)
-         "Mathworld.*",                 // test data group
+         ".*Mathworld.*",               // test data group
          ".*", 30, 30);                 // test function
    }
 
