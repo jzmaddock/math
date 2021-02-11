@@ -40,7 +40,7 @@ void expected_results()
 #ifndef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
    if(boost::math::policies::digits<double, boost::math::policies::policy<> >() == boost::math::policies::digits<long double, boost::math::policies::policy<> >())
    {
-      largest_type = "(long\\s+)?double|real_concept"
+      largest_type = "(long\\s+)?double|real_concept";
    }
    else
    {

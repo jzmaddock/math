@@ -49,7 +49,7 @@ void test_airy(T, const char* name)
 
    T tol = boost::math::tools::epsilon<T>() * 800;
    if (std::numeric_limits<T>::digits > 100)
-      tol *= 2; // slight error increase found in 128-bit long doubles.
+      tol *= 4; // slight error increase found in 128-bit long doubles.
    for(unsigned i = 0; i < data.size(); ++i)
    {
       BOOST_CHECK_CLOSE_FRACTION(data[i][1], boost::math::airy_ai(data[i][0]), tol);
