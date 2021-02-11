@@ -467,6 +467,13 @@ namespace boost { namespace math {
                for (k = n; k > 0; k--)             // backward recurrence for J
                {
                   next = 2 * (u + k) * current / x - prev;
+                  //
+                  // We cannot allow next to cancel to zero or the subsequent logic breaks.
+                  // We will instead pretend that the last bit of prev did not cancel out.
+                  // Only known test case is cyl_bessel_j(1, 8.65372791291101221695419871266094662Q):
+                  //
+                  if(next == 0)
+                     next = prev * boost::math::tools::epsilon<T>();
                   prev = current;
                   current = next;
                }
