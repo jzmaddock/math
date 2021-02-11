@@ -194,15 +194,15 @@ void expected_results()
          ".*",                          // stdlib
          ".*",                          // platform
          "double",                      // test type(s)
-         ".*",                          // test data group
-         ".*", 4, 3);                   // test function
+         ".*Y'v.*",              // test data group
+         ".*", 200, 70);         // test function
       add_expected_result(
          ".*",                          // compiler
          ".*",                          // stdlib
          ".*",                          // platform
          "double",                      // test type(s)
-         ".*Y'v.*",              // test data group
-         ".*", 200, 70);         // test function
+         ".*",                          // test data group
+         ".*", 4, 3);                   // test function
    }
 #endif
    //
