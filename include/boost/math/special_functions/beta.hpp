@@ -232,6 +232,7 @@ T ibeta_power_terms(T a,
    T cgh = static_cast<T>(c + Lanczos::g() - 0.5f);
    result = Lanczos::lanczos_sum_expG_scaled(c) / (Lanczos::lanczos_sum_expG_scaled(a) * Lanczos::lanczos_sum_expG_scaled(b));
    result *= prefix;
+   BOOST_MATH_INSTRUMENT_VARIABLE(result);
    // combine with the leftover terms from the Lanczos approximation:
    result *= sqrt(bgh / boost::math::constants::e<T>());
    result *= sqrt(agh / cgh);
@@ -239,6 +240,8 @@ T ibeta_power_terms(T a,
    // l1 and l2 are the base of the exponents minus one:
    T l1 = (x * b - y * agh) / agh;
    T l2 = (y * a - x * bgh) / bgh;
+   BOOST_MATH_INSTRUMENT_VARIABLE(l1);
+   BOOST_MATH_INSTRUMENT_VARIABLE(l2);
    if(((std::min)(fabs(l1), fabs(l2)) < 0.2))
    {
       // when the base of the exponent is very near 1 we get really
@@ -279,7 +282,7 @@ T ibeta_power_terms(T a,
             BOOST_MATH_INSTRUMENT_VARIABLE(result);
          }
       }
-      else if((std::max)(fabs(l1), fabs(l2)) < 0.5)
+      else if((std::max)(fabs(l1), fabs(l2)) < 0.2)
       {
          //
          // Both exponents are near one and both the exponents are
@@ -313,8 +316,11 @@ T ibeta_power_terms(T a,
          else
          {
             T l3 = boost::math::expm1(boost::math::log1p(l1, pol) / ratio, pol);
+            BOOST_MATH_INSTRUMENT_VARIABLE(l3);
             l3 = l2 + l3 + l3 * l2;
+            BOOST_MATH_INSTRUMENT_VARIABLE(l3);
             l3 = b * boost::math::log1p(l3, pol);
+            BOOST_MATH_INSTRUMENT_VARIABLE(l3);
             result *= exp(l3);
             BOOST_MATH_INSTRUMENT_VARIABLE(result);
          }
@@ -473,11 +479,6 @@ T ibeta_power_terms(T a,
       {
          power1 = pow((x * y * c * c) / (a * b), b);
          power2 = pow((x * c) / a, a - b);
-         if(power2 < boost::math::tools::min_value<T>())
-         {
-            power2 = pow((x * c) / a, (a - b) / 2);
-            power1 *= power2;
-         }
       }
       if (!(boost::math::isnormal)(power1) || !(boost::math::isnormal)(power2))
       {
