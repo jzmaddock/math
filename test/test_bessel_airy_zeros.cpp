@@ -840,7 +840,7 @@ Calculated using cpp_dec_float_50
   }
 
   BOOST_MATH_CHECK_THROW(airy_ai_zero<RealType>(-1), std::domain_error);
-  if (boost::math::tools::epsilon<RealTYpe>() > 1e-20)
+  if (boost::math::tools::epsilon<RealType>() > 1e-20)
   {
      // limited range of test data:
      BOOST_CHECK_CLOSE_FRACTION(airy_ai_zero<RealType>((std::numeric_limits<boost::int32_t>::max)()), -static_cast<RealType>(4678579.33301973093739L), tolerance);
@@ -912,7 +912,7 @@ Calculated using cpp_dec_float_50
   }
 
   BOOST_MATH_CHECK_THROW(airy_bi_zero<RealType>(-1), std::domain_error);
-  if (boost::math::tools::epsilon<RealTYpe>() > 1e-20)
+  if (boost::math::tools::epsilon<RealType>() > 1e-20)
   {
      // limited range of test data:
      BOOST_CHECK_CLOSE_FRACTION(airy_bi_zero<RealType>((std::numeric_limits<boost::int32_t>::max)()), -static_cast<RealType>(4678579.33229351984573L), tolerance * 300);
