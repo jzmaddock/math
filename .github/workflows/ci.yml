@@ -43,5 +43,5 @@ jobs:
             ./bootstrap.sh
             ./b2 headers
             ./b2 libs/config/test//print_config_info libs/config/test//print_math_info
-            ./b2 libs/math/test//${{ matrix.suite }}
-            #g++ -I. -g libs/math/t.cpp -o t && ./t
+            #./b2 libs/math/test//${{ matrix.suite }}
+            g++ -I. -g libs/math/t.cpp -o t && ./t

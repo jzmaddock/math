@@ -1,18 +1,14 @@
-
 #define BOOST_MATH_INSTRUMENT
-
+#include <boost/math/concepts/real_concept.hpp>
 #include <boost/math/special_functions.hpp>
 
 
 int main()
 {
-   double x = 11.791534423828125;
-   long double r = -3.53017140778223781420794006033810387155048392363051866610931e-9L;
+   using mp_t2 = boost::math::concepts::real_concept;
 
-   double r1 = boost::math::cyl_bessel_j(0, x);
-   long double r2 = boost::math::cyl_bessel_j(0, (long double)x);
+   double a(279777.4375), b(110919.8125), x(0.632396042346954345703125);
 
-   std::cout << boost::math::relative_difference(r1, (double)r) << std::endl;
-   std::cout << boost::math::relative_difference(r2, r) << std::endl;
-
+   std::cout << std::setprecision(35);
+   std::cout << boost::math::ibeta(mp_t2(a), mp_t2(b), mp_t2(x)) << std::endl;
 }
