@@ -473,6 +473,11 @@ T ibeta_power_terms(T a,
       {
          power1 = pow((x * y * c * c) / (a * b), b);
          power2 = pow((x * c) / a, a - b);
+         if(power2 < boost::math::tools::min_value<T>())
+         {
+            power2 = pow((x * c) / a, (a - b) / 2);
+            power1 *= power2;
+         }
       }
       if (!(boost::math::isnormal)(power1) || !(boost::math::isnormal)(power2))
       {
