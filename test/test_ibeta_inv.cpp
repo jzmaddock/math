@@ -98,6 +98,16 @@ void expected_results()
          ".*",                          // test data group
          ".*", 5000000L, 500000);         // test function
    }
+   else if (std::numeric_limits<long double>::digits > 64)
+   {
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                       // platform
+         "long double",                      // test type(s)
+         ".*",                          // test data group
+         ".*", 200000, 100000);            // test function
+   }
 #endif
    //
    // MinGW,
