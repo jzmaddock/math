@@ -191,6 +191,8 @@ void test_right_limit_infinite()
     // Multiprecision type have higher error rates, probably evaluation of f() is less accurate:
     if (std::numeric_limits<Real>::digits10 > std::numeric_limits<long double>::digits10)
        tol_mult = 12;
+    else if (std::numeric_limits<Real>::digits10 > 30)
+       tol_mult = 10;
     else if (std::numeric_limits<Real>::digits10 > std::numeric_limits<double>::digits10)
        tol_mult = 5;
     BOOST_CHECK_CLOSE_FRACTION(Q, Q_expected, tol * tol_mult);
@@ -411,7 +413,9 @@ void test_crc()
        // For high oscillation frequency, the quadrature sum is ill-conditioned.
        Q = integrator.integrate(f3, get_convergence_tolerance<Real>(), &error, &L1);
        Q_expected = s/(a*a+s*s);
-       if (std::numeric_limits<Real>::digits10 > std::numeric_limits<double>::digits10)
+       if (std::numeric_limits<Real>::digits10 > 30)
+          tol_mult = 50000; // we should really investigate this more??
+       else if (std::numeric_limits<Real>::digits10 > std::numeric_limits<double>::digits10)
           tol_mult = 5000; // we should really investigate this more??
        BOOST_CHECK_CLOSE_FRACTION(Q, Q_expected, tol_mult*tol);
     }
@@ -435,7 +439,9 @@ void test_crc()
        Q_expected = 1 / sqrt(1 + s*s);
        tol_mult = 3;
        // Multiprecision type have higher error rates, probably evaluation of f() is less accurate:
-       if (std::numeric_limits<Real>::digits10 > std::numeric_limits<long double>::digits10)
+       if (std::numeric_limits<Real>::digits10 > 30)
+          tol_mult = 3000;
+       else if (std::numeric_limits<Real>::digits10 > std::numeric_limits<long double>::digits10)
           tol_mult = 750;
        BOOST_CHECK_CLOSE_FRACTION(Q, Q_expected, tol_mult * tol);
     }
