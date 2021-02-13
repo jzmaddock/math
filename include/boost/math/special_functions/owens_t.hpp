@@ -762,7 +762,7 @@ namespace boost
                ii += 2;
                yi = (1.0-hs*yi) / static_cast<RealType>(ii);
                ai *= as;
-               if(ii > (std::min)(1500, (int)policies::get_max_series_iterations<Policy>()))
+               if(ii > (int)policies::get_max_series_iterations<Policy>())
                   policies::raise_evaluation_error("boost::math::owens_t<%1%>", 0, val, pol);
             } // while( true )
 
