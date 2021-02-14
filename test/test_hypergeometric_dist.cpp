@@ -418,9 +418,11 @@ void test_spots(RealType /*T*/, const char* type_name)
    // 50 eps as a percentage, up to a maximum of double precision
    // Test data taken from Mathematica 6
 #define T RealType
+   if (boost::math::tools::digits<RealType>() <= boost::math::tools::digits<double>())
+   {
 #include "hypergeometric_test_data.ipp"
-   do_test_hypergeometric<T>(hypergeometric_test_data, type_name, "Mathematica data");
-
+      do_test_hypergeometric<T>(hypergeometric_test_data, type_name, "Mathematica data");
+   }
 #include "hypergeometric_dist_data2.ipp"
    if(boost::is_floating_point<RealType>::value)
    {
