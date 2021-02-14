@@ -106,6 +106,16 @@ void expected_results()
          "[^|]*large[^|]*",                // test data group
          "[^|]*", 40000, 6000);            // test function
    }
+   else if (boost::math::tools::digits<long double>() > 64)
+   {
+      add_expected_result(
+         "[^|]*",                          // compiler
+         "[^|]*",                          // stdlib
+         "[^|]*",                          // platform
+         "real_concept",                   // test type(s)
+         "[^|]*large[^|]*",                // test data group
+         "[^|]*", 30000, 5000);            // test function
+   }
 #endif
    //
    // Catch all cases come last:
