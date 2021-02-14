@@ -21,11 +21,15 @@ void test_constant()
     std::vector<Real> v(n, c);
     auto qbs = cardinal_quadratic_b_spline<Real>(v.data(), v.size(), t0, h);
 
+    Real base_error = 100 * std::numeric_limits<Real>::epsilon();
+    if (std::numeric_limits<Real>::digits > 100)
+       base_error *= 2;
+
     size_t i = 0;
     while (i < n) {
       Real t = t0 + i*h;
       CHECK_ULP_CLOSE(c, qbs(t), 2);
-      CHECK_MOLLIFIED_CLOSE(0, qbs.prime(t), 100*std::numeric_limits<Real>::epsilon());
+      CHECK_MOLLIFIED_CLOSE(0, qbs.prime(t), base_error);
       ++i;
     }
 
@@ -33,10 +37,10 @@ void test_constant()
     while (i < n) {
       Real t = t0 + i*h + h/2;
       CHECK_ULP_CLOSE(c, qbs(t), 2);
-      CHECK_MOLLIFIED_CLOSE(0, qbs.prime(t), 300*std::numeric_limits<Real>::epsilon());
+      CHECK_MOLLIFIED_CLOSE(0, qbs.prime(t), 3 * base_error);
       t = t0 + i*h + h/4;
       CHECK_ULP_CLOSE(c, qbs(t), 2);
-      CHECK_MOLLIFIED_CLOSE(0, qbs.prime(t), 150*std::numeric_limits<Real>::epsilon());
+      CHECK_MOLLIFIED_CLOSE(0, qbs.prime(t), 1.5 * base_error);
       ++i;
     }
 }

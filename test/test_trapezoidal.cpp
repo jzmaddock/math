@@ -201,6 +201,8 @@ void test_slowly_converging()
     auto f = [](Real x)->Real { using std::sqrt;  return sqrt(1 - x*x); };
 
     Real tol = sqrt(sqrt(boost::math::tools::epsilon<Real>()));
+    if (boost::math::tools::digits<Real>() > 100)
+       tol *= 8;
     Real error_estimate;
     Real Q = trapezoidal(f, (Real) 0, (Real) 1, tol, 15, &error_estimate);
     BOOST_CHECK_CLOSE_FRACTION(Q, boost::math::constants::half_pi<Real>()/2, 10*tol);

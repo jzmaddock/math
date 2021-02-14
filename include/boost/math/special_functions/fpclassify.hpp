@@ -15,6 +15,7 @@
 #include <boost/config/no_tr1/cmath.hpp>
 #include <boost/limits.hpp>
 #include <boost/math/tools/real_cast.hpp>
+#include <boost/math/tools/precision.hpp>
 #include <boost/type_traits/is_floating_point.hpp>
 #include <boost/math/special_functions/math_fwd.hpp>
 #include <boost/math/special_functions/detail/fp_traits.hpp>
@@ -401,7 +402,9 @@ namespace detail {
       if(std::numeric_limits<T>::is_specialized)
          return isnormal_impl(x, generic_tag<true>());
 #endif
-       return !(x == 0);
+        if(x < 0) x = -x;
+        return x >= boost::math::tools::min_value<T>()
+            && x <= boost::math::tools::max_value<T>();
     }
 
     template<class T>

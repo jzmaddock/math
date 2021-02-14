@@ -1,19 +1,22 @@
-//  Copyright Xiaogang Zhang 2006
-//  Copyright John Maddock 2006, 2007
-//  Copyright Paul A. Bristow 2007
+//  Copyright John Maddock 2012
 
 //  Use, modification and distribution are subject to the
 //  Boost Software License, Version 1.0. (See accompanying file
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include <pch_light.hpp>
-#include "test_ellint_2.hpp"
+#include <boost/math/special_functions/jacobi.hpp>
+#include <boost/multiprecision/cpp_bin_float.hpp>
+
+#define SC_(x) static_cast<typename table_type<T>::type>(BOOST_STRINGIZE(x))
+#define TESTING_MP
+#include <test_jacobi.hpp>
 
 //
 // DESCRIPTION:
 // ~~~~~~~~~~~~
 //
-// This file tests the Elliptic Integrals of the second kind.
+// This file tests the Jacobi Elliptic Functions.
 // There are two sets of tests, spot
 // tests which compare our results with selected values computed
 // using the online special function calculator at
@@ -39,20 +42,6 @@ void expected_results()
    // Define the max and mean errors expected for
    // various compilers and platforms.
    //
-   const char* largest_type;
-#ifndef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
-   if(boost::math::policies::digits<double, boost::math::policies::policy<> >() == boost::math::policies::digits<long double, boost::math::policies::policy<> >())
-   {
-      largest_type = "(long\\s+)?double";
-   }
-   else
-   {
-      largest_type = "long double";
-   }
-#else
-   largest_type = "(long\\s+)?double";
-#endif
-
    //
    // Catch all cases come last:
    //
@@ -60,20 +49,30 @@ void expected_results()
       ".*",                          // compiler
       ".*",                          // stdlib
       ".*",                          // platform
-      largest_type,                  // test type(s)
-      ".*",      // test data group
-      ".*", 
-      std::numeric_limits<long double>::digits > 100 ? 45 : 15, 
-      std::numeric_limits<long double>::digits > 100 ? 45 : 10);
+      "cpp_bin_float_quad",          // test type(s)
+      ".*near 1.*",               // test data group
+      ".*", 7000, 500);            // test function
    add_expected_result(
       ".*",                          // compiler
       ".*",                          // stdlib
       ".*",                          // platform
-      "real_concept",                  // test type(s)
-      ".*",      // test data group
-      ".*", 
-      std::numeric_limits<long double>::digits > 100 ? 45 : 15,
-      std::numeric_limits<long double>::digits > 100 ? 45 : 10);
+      "cpp_bin_float_quad",          // test type(s)
+      ".*Large Phi.*",               // test data group
+      ".*", 50000, 5000);            // test function
+   add_expected_result(
+      ".*",                          // compiler
+      ".*",                          // stdlib
+      ".*",                          // platform
+      "cpp_bin_float_quad",          // test type(s)
+      ".*Mathworld.*",               // test data group
+      ".*", 100, 40);                 // test function
+   add_expected_result(
+      ".*",                          // compiler
+      ".*",                          // stdlib
+      ".*",                          // platform
+      "cpp_bin_float_quad",          // test type(s)
+      ".*",                          // test data group
+      ".*", 50, 20);                 // test function
    //
    // Finish off by printing out the compiler/stdlib/platform names,
    // we do this to make it easier to mark up expected error rates.
@@ -85,22 +84,6 @@ void expected_results()
 
 BOOST_AUTO_TEST_CASE( test_main )
 {
-    expected_results();
-    BOOST_MATH_CONTROL_FP;
-#ifndef BOOST_MATH_BUGGY_LARGE_FLOAT_CONSTANTS
-    test_spots(0.0F, "float");
-#endif
-    test_spots(0.0, "double");
-#ifndef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
-    test_spots(0.0L, "long double");
-#ifndef BOOST_MATH_NO_REAL_CONCEPT_TESTS
-    test_spots(boost::math::concepts::real_concept(0), "real_concept");
-#endif
-#else
-   std::cout << "<note>The long double tests have been disabled on this platform "
-      "either because the long double overloads of the usual math functions are "
-      "not available at all, or because they are too inaccurate for these tests "
-      "to pass.</note>" << std::endl;
-#endif
-
+   expected_results();
+   test_spots(boost::multiprecision::cpp_bin_float_quad(0), "cpp_bin_float_quad");
 }

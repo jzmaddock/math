@@ -112,14 +112,18 @@ void expected_results()
          "linux",                          // platform
          largest_type,                  // test type(s)
          ".*Y'v.*Random.*",              // test data group
-         ".*", 400000, 200000);         // test function
+         ".*", 
+         std::numeric_limits<long double>::digits > 100 ? 7000000 : 400000, 
+         std::numeric_limits<long double>::digits > 100 ?  700000 : 200000);
       add_expected_result(
          ".*",                          // compiler
          ".*",                          // stdlib
          "linux",                          // platform
          largest_type,                  // test type(s)
          ".*Y'[01v].*",              // test data group
-         ".*", 2000, 1000);         // test function
+         ".*", 
+         std::numeric_limits<long double>::digits > 100 ? 7000 : 2000, 
+         std::numeric_limits<long double>::digits > 100 ? 3000 : 1000);
       add_expected_result(
          ".*",                          // compiler
          ".*",                          // stdlib
@@ -173,8 +177,18 @@ void expected_results()
          ".*",                          // stdlib
          ".*",                          // platform
          "double",                      // test type(s)
+         ".*Y'v.*",                     // test data group
+         ".*", 50, 20);                 // test function
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                          // platform
+         "double",                      // test type(s)
          ".*Y'[Nn].*",              // test data group
          ".*", 20, 20);         // test function
+   }
+   else if (std::numeric_limits<double>::digits != std::numeric_limits<long double>::digits)
+   {
       add_expected_result(
          ".*",                          // compiler
          ".*",                          // stdlib
@@ -182,6 +196,13 @@ void expected_results()
          "double",                      // test type(s)
          ".*Y'v.*",              // test data group
          ".*", 200, 70);         // test function
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                          // platform
+         "double",                      // test type(s)
+         ".*",                          // test data group
+         ".*", 4, 3);                   // test function
    }
 #endif
    //

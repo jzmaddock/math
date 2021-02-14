@@ -183,6 +183,21 @@ void expected_results()
          ".*Yv.*",              // test data group
          ".*", 80, 70);         // test function
    }
+   else if ((std::numeric_limits<double>::digits != std::numeric_limits<long double>::digits))
+   {
+      //
+      // We get some spillover of errors
+      //
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                          // platform
+         "double",                      // test type(s)
+         ".*Yv.*",                      // test data group
+         ".*", 20, 10);                 // test function
+
+   }
+
 #endif
    //
    // defaults are based on MSVC-8 on Win32:

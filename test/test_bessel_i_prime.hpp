@@ -155,7 +155,7 @@ void test_bessel(T, const char* name)
         {{ SC_(1.0),  static_cast<T>(ldexp(0.5, -512)), SC_(0.5) }},
         {{ SC_(1.125),  static_cast<T>(ldexp(0.5, -512)), SC_(2.42025162605150606399395900489934587657244145536315936432966315563638e-20) }},
         {{ SC_(0.5), static_cast<T>(ldexp(0.5, -683)), SC_(3.5741154998461284276309443770923823816821202344841143399486401387635e102) }},
-#if LDBL_MAX_10_EXP > 326
+#if defined(TESTING_MP) || (LDBL_MAX_10_EXP > 326)
         {{ SC_(-1.125), static_cast<T>(ldexp(0.5, -512)), SC_(4.0715272050947359203430409041001937149343363573066460226173390878707e327) }},
 #else
         { { SC_(-1.125), static_cast<T>(ldexp(0.5, -512)), std::numeric_limits<T>::has_infinity ? std::numeric_limits<T>::infinity() : boost::math::tools::max_value<T>() } },

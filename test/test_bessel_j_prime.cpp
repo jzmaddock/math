@@ -234,6 +234,16 @@ void expected_results()
          ".*(JN'|j').*|.*Tricky.*",       // test data group
          ".*", 60000, 40000);               // test function
    }
+   else if (std::numeric_limits<double>::digits != std::numeric_limits<long double>::digits)
+   {
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                          // platform
+         "double",                      // test type(s)
+         ".*Mathworld.*",               // test data group
+         ".*", 30, 30);                 // test function
+   }
 #endif
    add_expected_result(
       ".*",                          // compiler

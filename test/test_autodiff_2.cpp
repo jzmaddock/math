@@ -329,6 +329,9 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(ylogx, T, all_float_types) {
     }
   }
   auto z1 = exp(z);
+  if (std::numeric_limits<T>::digits > 100)
+     eps *= 2; // slightly higher error rate for 128-bit reals
+
   // RHS is confirmed by
   // https://www.wolframalpha.com/input/?i=D%5Bx%5Ey,%7Bx,2%7D,%7By,4%7D%5D+%2F.+%7Bx-%3E2.0,+y-%3E3.0%7D
   BOOST_CHECK_CLOSE(z1.derivative(2u, 4u),

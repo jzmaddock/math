@@ -25,6 +25,9 @@
 
 #include <boost/config.hpp>
 #include <boost/limits.hpp>
+#ifdef BOOST_MATH_REAL_CONCEPT_128
+#include <boost/cstdfloat.hpp>
+#endif
 #include <boost/math/special_functions/round.hpp>
 #include <boost/math/special_functions/trunc.hpp>
 #include <boost/math/special_functions/modf.hpp>
@@ -50,7 +53,9 @@ namespace boost{ namespace math{
 namespace concepts
 {
 
-#ifdef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
+#ifdef BOOST_MATH_REAL_CONCEPT_128
+   typedef boost::float128_t real_concept_base_type;
+#elif defined( BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS)
    typedef double real_concept_base_type;
 #else
    typedef long double real_concept_base_type;
@@ -89,7 +94,6 @@ public:
 #ifdef BOOST_MATH_USE_FLOAT128
    real_concept(BOOST_MATH_FLOAT128_TYPE c) : m_value(c){}
 #endif
-
    // Assignment:
    real_concept& operator=(char c) { m_value = c; return *this; }
    real_concept& operator=(unsigned char c) { m_value = c; return *this; }
@@ -110,6 +114,9 @@ public:
    real_concept& operator=(float c) { m_value = c; return *this; }
    real_concept& operator=(double c) { m_value = c; return *this; }
    real_concept& operator=(long double c) { m_value = c; return *this; }
+#ifdef BOOST_MATH_USE_FLOAT128
+   real_concept& operator=(BOOST_MATH_FLOAT128_TYPE c) { m_value = c; return *this; }
+#endif
 
    // Access:
    real_concept_base_type value()const{ return m_value; }
