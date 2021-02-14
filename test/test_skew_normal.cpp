@@ -349,6 +349,8 @@ void test_spots(RealType)
       BOOST_MATH_STD_USING // ADL of std math lib names.
 
       // Test values from R = see skew_normal_drv.cpp which included the R code used.
+      // These are limited to 80-bit long double precision at best:
+      if(boost::math::tools::digits<RealType>() <= 64)
       {
         dist = skew_normal_distribution<RealType>(static_cast<RealType>(1.1l), static_cast<RealType>(2.2l), static_cast<RealType>(-3.3l));
 
@@ -387,7 +389,8 @@ void test_spots(RealType)
           tol100);
 
 
-      { // mode tests
+        if (boost::math::tools::digits<RealType>() <= 64)
+        { // mode tests
 
            dist = skew_normal_distribution<RealType>(static_cast<RealType>(0.l), static_cast<RealType>(1.l), static_cast<RealType>(4.l));
 
@@ -398,6 +401,7 @@ void test_spots(RealType)
 
 
       }
+      if (boost::math::tools::digits<RealType>() <= 64)
       {
         dist = skew_normal_distribution<RealType>(static_cast<RealType>(1.1l), static_cast<RealType>(0.02l), static_cast<RealType>(0.03l));
 
@@ -418,6 +422,7 @@ void test_spots(RealType)
            kurtosis_excess(dist)
            , static_cast<RealType>(9.2903475812137800239002e-008L), tol100);
       }
+      if (boost::math::tools::digits<RealType>() <= 64)
       {
         dist = skew_normal_distribution<RealType>(static_cast<RealType>(10.1l), static_cast<RealType>(5.l), static_cast<RealType>(-0.03l));
         BOOST_CHECK_CLOSE(      // mean:
@@ -437,6 +442,7 @@ void test_spots(RealType)
            kurtosis_excess(dist)
            , static_cast<RealType>(9.2903475812137800239002e-008L), tol100);
       }
+      if (boost::math::tools::digits<RealType>() <= 64)
       {
         dist = skew_normal_distribution<RealType>(static_cast<RealType>(-10.1l), static_cast<RealType>(5.l), static_cast<RealType>(30.l));
         BOOST_CHECK_CLOSE(      // mean:
