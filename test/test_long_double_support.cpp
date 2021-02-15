@@ -37,6 +37,16 @@ void expected_results()
    const char* largest_type;
    largest_type = "(long\\s+)?double";
 
+   if (std::numeric_limits<long double>::digits > 100)
+   {
+      add_expected_result(
+         ".*",                          // compiler
+         ".*",                          // stdlib
+         ".*",                          // platform
+         largest_type,                  // test type(s)
+         ".*",                          // test data group
+         "(std::exp|::expl).*.*", 400, 100);                 // test function
+   }
    add_expected_result(
       ".*",                          // compiler
       ".*",                          // stdlib

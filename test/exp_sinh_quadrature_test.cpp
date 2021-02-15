@@ -191,9 +191,9 @@ void test_right_limit_infinite()
     // Multiprecision type have higher error rates, probably evaluation of f() is less accurate:
     if (std::numeric_limits<Real>::digits10 > std::numeric_limits<long double>::digits10)
        tol_mult = 12;
-    else if (std::numeric_limits<Real>::digits10 > 30)
+    else if (boost::math::tools::digits<Real>() > 64)
        tol_mult = 10;
-    else if (std::numeric_limits<Real>::digits10 > std::numeric_limits<double>::digits10)
+    else if (boost::math::tools::digits<Real>() > 53)
        tol_mult = 5;
     BOOST_CHECK_CLOSE_FRACTION(Q, Q_expected, tol * tol_mult);
     // The integrand is strictly positive, so it coincides with the value of the integral:
@@ -414,7 +414,7 @@ void test_crc()
        Q = integrator.integrate(f3, get_convergence_tolerance<Real>(), &error, &L1);
        Q_expected = s/(a*a+s*s);
        if (std::numeric_limits<Real>::digits10 > 30)
-          tol_mult = 50000; // we should really investigate this more??
+          tol_mult = 200000; // we should really investigate this more??
        else if (std::numeric_limits<Real>::digits10 > std::numeric_limits<double>::digits10)
           tol_mult = 5000; // we should really investigate this more??
        BOOST_CHECK_CLOSE_FRACTION(Q, Q_expected, tol_mult*tol);

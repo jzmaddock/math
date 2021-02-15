@@ -757,7 +757,7 @@ void test_2_arg()
       return tc < 0 ? 1 / boost::math::cbrt(t * (1-t)) : 1 / boost::math::cbrt(t * tc);
    }, 0, 1);
    if (boost::math::tools::digits<Real>() > 100)
-      tol *= 2;
+      tol *= 6;
    BOOST_CHECK_CLOSE_FRACTION(Q, boost::math::pow<2>(boost::math::tgamma(Real(2) / 3)) / boost::math::tgamma(Real(4) / 3), tol * 3);
    //
    // We can do the same thing with ((1+x)(1-x))^-N ; N < 1
