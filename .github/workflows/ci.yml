@@ -45,5 +45,5 @@ jobs:
             ./b2 libs/config/test//print_config_info libs/config/test//print_math_info
             #./b2 libs/math/test//${{ matrix.suite }}
             cd libs/math/test
-            ../../../b2 test_ibeta_float test_ibeta_double test_ibeta_long_double test_ibeta_real_concept1 test_ibeta_real_concept2 test_ibeta_real_concept3 test_ibeta_real_concept4 test_ibeta_derivative_float test_ibeta_derivative_double test_ibeta_derivative_long_double test_ibeta_derivative_real_concept1 test_ibeta_derivative_real_concept2 test_ibeta_derivative_real_concept3 test_ibeta_derivative_real_concept4 test_ibeta_inv_float test_ibeta_inv_double test_ibeta_inv_long_double test_ibeta_inv_real_concept1 test_ibeta_inv_real_concept2 test_ibeta_inv_real_concept3 test_ibeta_inv_real_concept4 test_ibeta_inv_ab_double test_ibeta_inv_ab_long_double test_ibeta_inv_ab_real_concept1 test_ibeta_inv_ab_real_concept2 test_ibeta_inv_ab_real_concept3
+            ../../../b2 test_igamma test_igamma_inv_float test_igamma_inv_double test_igamma_inv_long_double test_igamma_inv_real_concept test_igamma_inva_float test_igamma_inva_double test_igamma_inva_long_double test_igamma_inva_real_concept test_instantiate1 test_jacobi test_laguerre
             #g++ -I. -g libs/math/t.cpp -o t && ./t
