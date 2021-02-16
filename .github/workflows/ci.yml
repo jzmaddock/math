@@ -45,5 +45,5 @@ jobs:
             ./b2 libs/config/test//print_config_info libs/config/test//print_math_info
             #./b2 libs/math/test//${{ matrix.suite }}
             cd libs/math/test
-            ./b2 test_airy test_bessel_j test_bessel_y test_bessel_i test_bessel_k test_bessel_j_prime test_bessel_k_prime test_bessel_i_prime test_bessel_y_prime test_beta test_bessel_airy_zeros test_bernoulli_constants test_binomial_coeff
+            ../../../b2 test_airy test_bessel_j test_bessel_y test_bessel_i test_bessel_k test_bessel_j_prime test_bessel_k_prime test_bessel_i_prime test_bessel_y_prime test_beta test_bessel_airy_zeros test_bernoulli_constants test_binomial_coeff
             #g++ -I. -g libs/math/t.cpp -o t && ./t
