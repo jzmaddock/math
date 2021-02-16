@@ -45,5 +45,5 @@ jobs:
             ./b2 libs/config/test//print_config_info libs/config/test//print_math_info
             #./b2 libs/math/test//${{ matrix.suite }}
             cd libs/math/test
-            ../../../b2 test_carlson_1 test_carlson_2 test_carlson_3 test_carlson_4 test_cbrt test_difference test_digamma test_ellint_1 test_ellint_2 test_ellint_3 test_ellint_d test_jacobi_theta test_jacobi_zeta test_heuman_lambda test_erf test_expint test_factorials test_gamma test_gamma_mp test_hankel test_hermite
+            ../../../b2 test_ibeta_float test_ibeta_double test_ibeta_long_double test_ibeta_real_concept1 test_ibeta_real_concept2 test_ibeta_real_concept3 test_ibeta_real_concept4 test_ibeta_derivative_float test_ibeta_derivative_double test_ibeta_derivative_long_double test_ibeta_derivative_real_concept1 test_ibeta_derivative_real_concept2 test_ibeta_derivative_real_concept3 test_ibeta_derivative_real_concept4 test_ibeta_inv_float test_ibeta_inv_double test_ibeta_inv_long_double test_ibeta_inv_real_concept1 test_ibeta_inv_real_concept2 test_ibeta_inv_real_concept3 test_ibeta_inv_real_concept4 test_ibeta_inv_ab_double test_ibeta_inv_ab_long_double test_ibeta_inv_ab_real_concept1 test_ibeta_inv_ab_real_concept2 test_ibeta_inv_ab_real_concept3
             #g++ -I. -g libs/math/t.cpp -o t && ./t
