@@ -45,7 +45,6 @@ using boost::math::owens_t;
 
 //
 // Defining TEST_CPP_DEC_FLOAT enables testing of multiprecision support.
-// This requires the multiprecision library from sandbox/big_number.
 // Note that these tests *do not pass*, but they do give an idea of the 
 // error rates that can be expected....
 //
@@ -126,48 +125,66 @@ void expected_results()
       << BOOST_STDLIB << ", " << BOOST_PLATFORM << std::endl;
 }
 
-BOOST_AUTO_TEST_CASE( test_main )
+BOOST_AUTO_TEST_CASE(test_main)
 {
-  BOOST_MATH_CONTROL_FP;
+   BOOST_MATH_CONTROL_FP;
 
-  expected_results();
+   expected_results();
 
-  // Basic sanity-check spot values.
+   // Basic sanity-check spot values.
 
-  // (Parameter value, arbitrarily zero, only communicates the floating point type).
-  test_spots(0.0F); // Test float.
-  test_spots(0.0); // Test double.
+   // (Parameter value, arbitrarily zero, only communicates the floating point type).
+   test_spots(0.0F); // Test float.
+   test_spots(0.0); // Test double.
+   //
+   // long double tests only up to 80-bit real precision
+   // higher precision values are not supported in the current implementation.
+   //
+   if (std::numeric_limits<long double>::digits <= 64)
+   {
 #ifndef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
-  test_spots(0.0L); // Test long double.
+      test_spots(0.0L); // Test long double.
 #if !BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x582))
-  test_spots(boost::math::concepts::real_concept(0.)); // Test real concept.
+      test_spots(boost::math::concepts::real_concept(0.)); // Test real concept.
 #endif
 #endif
-
-  check_against_T7(0.0F); // Test float.
-  check_against_T7(0.0); // Test double.
+   }
+   check_against_T7(0.0F); // Test float.
+   check_against_T7(0.0); // Test double.
+   //
+   // long double tests only up to 80-bit real precision
+   // higher precision values are not supported in the current implementation.
+   //
+   if (std::numeric_limits<long double>::digits <= 64)
+   {
 #ifndef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
-  check_against_T7(0.0L); // Test long double.
+      check_against_T7(0.0L); // Test long double.
 #if !BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x582))
-  check_against_T7(boost::math::concepts::real_concept(0.)); // Test real concept.
+      check_against_T7(boost::math::concepts::real_concept(0.)); // Test real concept.
 #endif
 #endif
-
-  test_owens_t(0.0F, "float"); // Test float.
-  test_owens_t(0.0, "double"); // Test double.
+   }
+   test_owens_t(0.0F, "float"); // Test float.
+   test_owens_t(0.0, "double"); // Test double.
+   //
+   // long double tests only up to 80-bit real precision
+   // higher precision values are not supported in the current implementation.
+   //
+   if (std::numeric_limits<long double>::digits <= 64)
+   {
 #ifndef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
-  test_owens_t(0.0L, "long double"); // Test long double.
+      test_owens_t(0.0L, "long double"); // Test long double.
 #if !BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x582))
-  test_owens_t(boost::math::concepts::real_concept(0.), "real_concept"); // Test real concept.
+      test_owens_t(boost::math::concepts::real_concept(0.), "real_concept"); // Test real concept.
 #endif
 #endif
 #ifdef TEST_CPP_DEC_FLOAT
-  typedef boost::multiprecision::number<boost::multiprecision::cpp_dec_float<35> > cpp_dec_float_35;
-  test_owens_t(cpp_dec_float_35(0), "cpp_dec_float_35"); // Test real concept.
-  test_owens_t(boost::multiprecision::cpp_dec_float_50(0), "cpp_dec_float_50"); // Test real concept.
-  test_owens_t(boost::multiprecision::cpp_dec_float_100(0), "cpp_dec_float_100"); // Test real concept.
+      typedef boost::multiprecision::number<boost::multiprecision::cpp_dec_float<35> > cpp_dec_float_35;
+      test_owens_t(cpp_dec_float_35(0), "cpp_dec_float_35"); // Test real concept.
+      test_owens_t(boost::multiprecision::cpp_dec_float_50(0), "cpp_dec_float_50"); // Test real concept.
+      test_owens_t(boost::multiprecision::cpp_dec_float_100(0), "cpp_dec_float_100"); // Test real concept.
 #endif
-  
+}
 } // BOOST_AUTO_TEST_CASE( test_main )
 
 /*

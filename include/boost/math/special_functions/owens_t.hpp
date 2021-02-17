@@ -203,7 +203,7 @@ namespace boost
             const RealType as = -a*a;
             const RealType y = static_cast<RealType>(1) / hs;
 
-            unsigned short ii = 1;
+            unsigned ii = 1;
             RealType val = 0;
             RealType vi = a * exp( -ah*ah*half<RealType>() ) * one_div_root_two_pi<RealType>();
             RealType z = owens_t_znorm1(ah, pol)/h;
@@ -371,7 +371,7 @@ namespace boost
             const RealType hs = h*h;
             const RealType as = -a*a;
 
-            unsigned short ii = 1;
+            unsigned ii = 1;
             RealType ai = a * exp( -hs*(static_cast<RealType>(1)-as)*half<RealType>() ) * one_div_two_pi<RealType>();
             RealType yi = 1;
             RealType val = 0;
@@ -631,7 +631,7 @@ namespace boost
             const RealType as = -a*a;
             const RealType y = static_cast<RealType>(1) / hs;
 
-            unsigned short ii = 1;
+            unsigned ii = 1;
             RealType val = 0;
             RealType vi = a * exp( -ah*ah*half<RealType>() ) / root_two_pi<RealType>();
             RealType z = owens_t_znorm1(ah, pol)/h;
@@ -675,7 +675,7 @@ namespace boost
             const RealType as = -a*a;
             const RealType y = static_cast<RealType>(1) / hs;
 
-            unsigned short ii = 1;
+            unsigned ii = 1;
             RealType val = 0;
             RealType vi = a * exp( -ah*ah*half<RealType>() ) / root_two_pi<RealType>();
             RealType z = boost::math::detail::owens_t_znorm1(ah, pol)/h;
@@ -746,12 +746,13 @@ namespace boost
             const RealType hs = h*h;
             const RealType as = -a*a;
 
-            unsigned short ii = 1;
+            unsigned ii = 1;
             RealType ai = constants::one_div_two_pi<RealType>() * a * exp( -0.5*hs*(1.0-as) );
             RealType yi = 1.0;
             RealType val = 0.0;
 
             RealType lim = boost::math::policies::get_epsilon<RealType, Policy>();
+            RealType convergence = boost::math::tools::max_value<RealType>();
 
             while( true )
             {
@@ -762,6 +763,14 @@ namespace boost
                ii += 2;
                yi = (1.0-hs*yi) / static_cast<RealType>(ii);
                ai *= as;
+               if ((ii > 500) && (((ii / 2) % 20) == 0))
+               {
+                  // Check if we're still converging:
+                  RealType conv = fabs(val * lim) / fabs(term);
+                  if(convergence <= conv)
+                     policies::raise_evaluation_error("boost::math::owens_t<%1%>", 0, val, pol);
+                  convergence = conv;
+               }
                if(ii > (int)policies::get_max_series_iterations<Policy>())
                   policies::raise_evaluation_error("boost::math::owens_t<%1%>", 0, val, pol);
             } // while( true )
