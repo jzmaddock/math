@@ -40,7 +40,6 @@ void expected_results()
    // Define the max and mean errors expected for
    // various compilers and platforms.
    //
-   const char* largest_type;
    add_expected_result(
       ".*",                          // compiler
       ".*",                          // stdlib
@@ -62,6 +61,13 @@ void expected_results()
       "cpp_bin_float_quad",          // test type(s)
       ".*Random Data.*",             // test data group
       ".*", 400, 50);                // test function
+   add_expected_result(
+      ".*",                          // compiler
+      ".*",                          // stdlib
+      ".*",                          // platform
+      "cpp_bin_float_quad",          // test type(s)
+      ".*(large values).*",          // test data group
+      ".*", 3000, 1200);             // test function
    add_expected_result(
       ".*",                          // compiler
       ".*",                          // stdlib

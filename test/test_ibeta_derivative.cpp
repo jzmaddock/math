@@ -77,6 +77,13 @@ void expected_results()
          "[^|]*Large.*",                   // test data group
          ".*", 300000, 10000);             // test function
       add_expected_result(
+         "GNU[^|]*",                       // compiler
+         "[^|]*",                          // stdlib
+         "win32[^|]*",                     // platform
+         largest_type,                     // test type(s)
+         "[^|]*Large.*",                   // test data group
+         ".*", 90000, 6000);               // test function
+      add_expected_result(
          "[^|]*",                          // compiler
          "[^|]*",                          // stdlib
          "[^|]*",                          // platform

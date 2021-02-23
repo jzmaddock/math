@@ -173,6 +173,13 @@ void expected_results()
    {
       // some errors spill over into type double as well:
       add_expected_result(
+         "GNU.*",                       // compiler
+         ".*",                          // stdlib
+         "Win32.*",                     // platform
+         "double",                      // test type(s)
+         ".*Y'v.*",                     // test data group
+         ".*", 200, 20);                 // test function
+      add_expected_result(
          ".*",                          // compiler
          ".*",                          // stdlib
          ".*",                          // platform

@@ -303,7 +303,7 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(log_test, T, all_float_types) {
 BOOST_AUTO_TEST_CASE_TEMPLATE(ylogx, T, all_float_types) {
   using std::log;
   using std::pow;
-  const T eps = 100 * std::numeric_limits<T>::epsilon(); // percent
+  T eps = 100 * std::numeric_limits<T>::epsilon(); // percent
   constexpr std::size_t m = 5;
   constexpr std::size_t n = 4;
   const T cx = 2.0;
