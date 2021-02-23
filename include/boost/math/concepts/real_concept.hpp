@@ -340,6 +340,11 @@ inline std::basic_istream<charT, traits>& operator>>(std::basic_istream<charT, t
 
 } // namespace concepts
 
+
+inline bool isnormal(concepts::real_concept const& val) { return (isnormal)(val.value()); }
+inline bool isinf(concepts::real_concept const& val) { return (isinf)(val.value()); }
+inline bool isnan(concepts::real_concept const& val) { return (isnan)(val.value()); }
+
 namespace tools
 {
 
