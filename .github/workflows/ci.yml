@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
-    matrix:
-      suite: [ special_fun, distribution_tests, misc, interpolators, quadrature, autodiff ]
+      matrix:
+        suite: [ special_fun, distribution_tests, misc, interpolators, quadrature, autodiff ]
     steps:
       - uses: actions/checkout@v2.1.0
       - uses: uraimo/run-on-arch-action@v2.0.5
