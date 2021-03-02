@@ -313,7 +313,7 @@ void test_nr_examples()
     tol_mul = 1;
     if (std::numeric_limits<Real>::is_specialized == false)
        tol_mul = 6;
-    else if (std::numeric_limits<Real>::digits10 > 40)
+    else if (std::numeric_limits<Real>::digits10 > 30)
        tol_mul = 100;
     else
        tol_mul = 3;
